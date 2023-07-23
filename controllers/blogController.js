@@ -21,3 +21,23 @@ exports.createBlog=async(req,res)=>{
         res.status(500).json({message:error.message})                 
     }
 }
+exports.deleteBlog=async(req,res)=>{
+    const {id}=req.params
+    try {
+        const blog= await Blog.findByIdAndDelete(id)
+
+        res.status(201).json(blog)
+    } catch (error) {
+        res.status(500).json({message:error.message})                 
+    }
+}
+exports.fetchBlogById=async(req,res)=>{
+const {id}=req.params
+try {
+    const card = await Blog.findById(id)
+    res.status(201).json(card)
+    
+} catch (error) {
+    res.status(500).json({message:error.message})
+}
+}
