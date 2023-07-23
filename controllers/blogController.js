@@ -41,3 +41,13 @@ try {
     res.status(500).json({message:error.message})
 }
 }
+exports.updateBlog=async(req,res)=>{
+    const {id} = req.params
+    
+    try {
+      const product=await Product.findByIdAndUpdate(id,req.body)
+      res.status(201).json(product)
+    } catch (error) {
+      res.status(400).json(error)
+    }
+  }
