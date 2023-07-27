@@ -20,6 +20,17 @@ const travelBlogSchema = new mongoose.Schema({
 },{
     timestamps: true,
   });
+  const virtual = travelBlogSchema.virtual('id');
+virtual.get(function () {
+  return this._id;
+});
+travelBlogSchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+  transform: function (doc, ret) {
+    delete ret._id;
+  },
+});
 
 // Create the travel blog model using the schema
 const Blog = mongoose.model('Blog', travelBlogSchema);
